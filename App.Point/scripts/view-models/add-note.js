@@ -11,9 +11,11 @@ app.viewmodels = app.viewmodels || {};
         },
         addImage: function () {
             var success = function (data) {
+                console.log('wtf');
                 $("#user-images")
                     .data("kendoMobileListView")
-                    .prepend(["data:image/jpeg;base64," + data]);
+                    .prepend(["images/01.jpg"]);
+                
             };
             var error = function () {
                 navigator.notification.alert("Unfortunately we could not add the image");
