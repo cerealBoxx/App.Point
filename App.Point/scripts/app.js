@@ -17,5 +17,6 @@ var dataSource = dataSource || {};
         new kendo.mobile.Application(document.body, {
             transition: 'slide'
         });
+        
     }, false);
 }());
