@@ -1,16 +1,18 @@
-var dataSource = dataSource || {};
+var ds = ds || {};
 (function () {
     document.addEventListener('deviceready', function () {
         navigator.splashscreen.hide();
-        dataSource = new kendo.data.DataSource({
+        ds = new kendo.data.DataSource({
             data: [
                 {
-                    title: "Jane Doe",
-                    content: "Lorem ipsum ala bala"
+                    title: "Hello world !",
+                    content: "Lorem ipsum ala bala",
+                    date: "1/1/2001"
                 },
                 {
-                    title: "Gosho",
-                    content: "Lorem ipsum"
+                    title: "Some title here",
+                    content: "Lorem ipsum ala bala",
+                    date: "1/1/1991"
                 }
         ]
         });

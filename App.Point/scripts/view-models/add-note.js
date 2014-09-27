@@ -11,10 +11,6 @@ app.viewmodels = app.viewmodels || {};
         },
         addImage: function () {
             var success = function (data) {
-                $("#user-images").kendoMobileListView({
-                dataSource: ["images/01.jpg"],
-                template: "<img src='#: data #'>"
-            });
                 $("#user-images")
                     .data("kendoMobileListView")
                     .prepend(["data:image/jpeg;base64," + data]);
