@@ -10,7 +10,7 @@ app.viewmodels = app.viewmodels || {};
 
 
             function loadPhotos() {
-                everlive.Files.get().then(function (data) {
+                appMain.everlive.Files.get().then(function (data) {
                     var files = [];
                     data.result.forEach(function (image) {
                         files.push(image.Uri);
@@ -23,7 +23,7 @@ app.viewmodels = app.viewmodels || {};
             }
             loadPhotos();
 
-            everlive.Files.create({
+            appMain.everlive.Files.create({
                 Filename: Math.random().toString(36).substring(2, 15) + ".jpg",
                 ContentType: "image/jpeg",
                 base64: data
