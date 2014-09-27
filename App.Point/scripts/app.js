@@ -3,6 +3,8 @@ var appMain = appMain || {};
 (function (scope) {
     document.addEventListener('deviceready', function () {
         navigator.splashscreen.hide();
+        appMain.everlive = new Everlive("cZswy0ZulYmXBaML");
+        console.log(appMain.everlive)
         ds = new kendo.data.DataSource({
             data: [
                 {
@@ -17,11 +19,12 @@ var appMain = appMain || {};
                 }
         ]
         });
+        
         new kendo.mobile.Application(document.body, {
             transition: 'slide'
         });
         
-        appMain.everlive = new Everlive("cZswy0ZulYmXBaML");
+        
         
     }, false);
 }());
