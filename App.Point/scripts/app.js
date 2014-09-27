@@ -1,5 +1,6 @@
 var ds = ds || {};
-(function () {
+var appMain = appMain || {};
+(function (scope) {
     document.addEventListener('deviceready', function () {
         navigator.splashscreen.hide();
         ds = new kendo.data.DataSource({
@@ -20,7 +21,7 @@ var ds = ds || {};
             transition: 'slide'
         });
         
-        var everlive = new Everlive("cZswy0ZulYmXBaML");
+        appMain.everlive = new Everlive("cZswy0ZulYmXBaML");
         
     }, false);
 }());
