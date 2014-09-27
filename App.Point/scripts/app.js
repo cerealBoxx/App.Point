@@ -20,5 +20,7 @@ var ds = ds || {};
             transition: 'slide'
         });
         
+        var everlive = new Everlive("cZswy0ZulYmXBaML");
+        
     }, false);
 }());

@@ -7,6 +7,27 @@ app.viewmodels = app.viewmodels || {};
         save: function () {
             //TODO create json from add-note.html(#user-content)
             //TODO push json to database
+
+
+            function loadPhotos() {
+                everlive.Files.get().then(function (data) {
+                    var files = [];
+                    data.result.forEach(function (image) {
+                        files.push(image.Uri);
+                    });
+                    $("#images").kendoMobileListView({
+                        dataSource: files,
+                        template: "<img src='#: data #'>"
+                    });
+                });
+            }
+            loadPhotos();
+
+            everlive.Files.create({
+                Filename: Math.random().toString(36).substring(2, 15) + ".jpg",
+                ContentType: "image/jpeg",
+                base64: data
+            }).then(loadPhotos);
             console.log("note added");
         },
         addImage: function () {
@@ -14,8 +35,8 @@ app.viewmodels = app.viewmodels || {};
                 console.log('wtf');
                 $("#user-images")
                     .data("kendoMobileListView")
-                    .prepend(["images/01.jpg"]);
-                
+                    .prepend(["data:image/jpeg;base64," + data]);
+
             };
             var error = function () {
                 navigator.notification.alert("Unfortunately we could not add the image");
