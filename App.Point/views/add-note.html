@@ -1,4 +1,9 @@
-<div data-role="view" data-layout="main" data-model="app.Viewmodels.addNote">
+<div data-role="view" data-layout="main" data-model="app.viewModels.addNote">
+     <div data-role="header">
+        <div data-role="navbar">
+            New appointment
+        </div>
+    </div>
     <div data-role="footer">
         <div data-role="tabstrip">
             <a href="views/main.html" data-icon="reply">Back</a>
@@ -19,13 +24,13 @@
             </li>
             <li>
                 <label>
-                    Type date
+                    Date
                     <input id="input-date" type="date" data-bind="value: date" value="2012-03-22" />
                 </label>
             </li>
             <li>
                 <label>
-                    Type time
+                    Time
                     <input type="time" data-bind="value: time" value="22:30" />
                 </label>
             </li>
@@ -46,7 +51,7 @@
                     <li>Add contact
                         <a data-role="detailbutton" data-style="contactadd" data-bind="events: {click: addContact}"></a>
                     </li>
-                    <li>Save note
+                    <li>Save
                         <a data-role="detailbutton" data-style="detaildisclose" data-bind="events: {click: save}"></a>
                     </li>
                 </ul>
