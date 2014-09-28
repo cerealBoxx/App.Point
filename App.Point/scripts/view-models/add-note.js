@@ -2,26 +2,23 @@ var app = app || {};
 app.viewmodels = app.viewmodels || {};
 var appMain = appMain || {};
 
-
-
 (function (scope) {
     'use strict';
     scope.addNote = kendo.observable({
-        save: function () {
-            //TODO create json from add-note.html(#user-content)
-            //TODO push json to database
-            $("#user-images").append('note saved ');
-        },
+        title: '',
+        content: '',
+        date: '',
+        time: '',
+        alarmOn: false,
         addImage: function () {
-
             var success = function (data) {
-                $("#user-images").append('-Uploading to DB-');
+                //$("#user-images").append('-Uploading to DB-');
                 appMain.everlive.Files.create({
                     Filename: Math.random().toString(36).substring(2, 15) + ".jpg",
                     ContentType: "image/jpeg",
                     base64: data
                 }).then(loadPhotos);
-                $("#user-images").append('-Uploaded-');
+                //$("#user-images").append('-Uploaded-');
             };
 
             var error = function () {
@@ -32,13 +29,25 @@ var appMain = appMain || {};
                 targetHeight: 400,
                 targetWidth: 400
             };
-            $("#user-images").append('-Calling getPicture-');
+            //$("#user-images").append('-Calling getPicture-');
             navigator.camera.getPicture(success, error, config);
         },
         addContact: function () {
             loadPhotos();
-            $("#user-images").append('contact added ');
-        }
+            //$("#user-images").append('contact added ');
+        },
+        save: function () {
+            //TODO create json from add-note.html(#user-content)
+            //TODO push json to database
+            var note = {
+                title: this.get('title'),
+                content: this.get('content'),
+                date: this.get('date'),
+                time: this.get('time'),
+                alarm: this.get('alarmOn')
+            };
+            console.log(note);
+        },
     });
 
     function loadPhotos() {
