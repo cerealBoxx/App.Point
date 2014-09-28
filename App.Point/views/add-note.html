@@ -5,24 +5,52 @@
         </div>
     </div>
     <div id="user-content">
-        <label for="tb-title">Title:</label>
-        <input type="text" id="tb-title" />
-        <textarea rows="5" cols="42" id="tb-content"></textarea>
-        <input type="date" name="bdaytime" />
-        <label for="alarm">Alarm:</label>
-        <input id="alarm" type="checkbox" />
-        <ul data-role="buttongroup" data-enable="false">
-            <button data-role="button" data-bind="events: {click: addImage}" data-align="right">
-                Add photo
-            </button>
-            <button data-role="button" data-bind="events: {click: addContact}">
-                Add contact
-            </button>
-            <button data-role="button" data-bind="events: {click: save}">
-                Save
-            </button>
+        <ul data-role="listview" data-style="inset">
+            <li>
+                <label>Title
+                    <input id="tb-title" type="text" value="Title" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Description
+                    <textarea id="tb-description" style="resize: none">Text here</textarea>
+                </label>
+            </li>
+            <li>
+                <label>
+                    Type date
+                    <input id="input-date" type="date" value="2012-03-22" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Type time
+                    <input type="time" value="22:30" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Alarm
+                    <input type="checkbox" />
+                </label>
+            </li>
         </ul>
         <ul id="user-images"></ul>
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                <ul>
+                    <li>Add photo
+                        <a data-role="detailbutton" data-style="contactadd" data-bind="events: {click: addImage}"></a>
+                    </li>
+                    <li>Add contact
+                        <a data-role="detailbutton" data-style="contactadd" data-bind="events: {click: addContact}"></a>
+                    </li>
+                    <li>Save note
+                        <a data-role="detailbutton" data-style="detaildisclose" data-bind="events: {click: save}"></a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
-    
 </div>

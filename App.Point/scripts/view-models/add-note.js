@@ -1,6 +1,9 @@
 var app = app || {};
 app.viewmodels = app.viewmodels || {};
 var appMain = appMain || {};
+
+
+
 (function (scope) {
     'use strict';
     scope.addNote = kendo.observable({
@@ -10,6 +13,7 @@ var appMain = appMain || {};
             $("#user-images").append('note saved ');
         },
         addImage: function () {
+
             var success = function (data) {
                 $("#user-images").append('-Uploading to DB-');
                 appMain.everlive.Files.create({
@@ -28,7 +32,6 @@ var appMain = appMain || {};
                 targetHeight: 400,
                 targetWidth: 400
             };
-
             $("#user-images").append('-Calling getPicture-');
             navigator.camera.getPicture(success, error, config);
         },
