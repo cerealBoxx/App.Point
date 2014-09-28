@@ -2,7 +2,7 @@ var app = app || {};
 
 var imageData = '';
 var ds = ds || {};
-app.viewmodels = (function () {
+app.Viewmodels = (function () {
     'use strict';
     var addNote = kendo.observable({
         title: '',
