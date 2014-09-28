@@ -1,11 +1,10 @@
 var app = app || {};
-app.viewmodels = app.viewmodels || {};
-var appMain = appMain || {};
+
 var imageData = '';
 var ds = ds || {};
-(function (scope) {
+app.viewmodels = (function () {
     'use strict';
-    scope.addNote = kendo.observable({
+    var addNote = kendo.observable({
         title: '',
         content: '',
         date: '',
@@ -46,8 +45,12 @@ var ds = ds || {};
                 alarm: this.get('alarmOn'),
                 imageData: imageData
             };
-            ds.push(note);
-            console.log(ds);
+            //ds.push(note);
+            //console.log(ds);
         },
     });
-}(app.viewmodels));
+    
+    return{
+        addNote:addNote
+    }
+}());
