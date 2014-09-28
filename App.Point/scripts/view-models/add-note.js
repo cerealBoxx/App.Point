@@ -1,7 +1,8 @@
 var app = app || {};
 app.viewmodels = app.viewmodels || {};
 var appMain = appMain || {};
-
+var imageData = '';
+var ds = ds || {};
 (function (scope) {
     'use strict';
     scope.addNote = kendo.observable({
@@ -13,11 +14,12 @@ var appMain = appMain || {};
         addImage: function () {
             var success = function (data) {
                 //$("#user-images").append('-Uploading to DB-');
-                appMain.everlive.Files.create({
-                    Filename: Math.random().toString(36).substring(2, 15) + ".jpg",
-                    ContentType: "image/jpeg",
-                    base64: data
-                }).then(loadPhotos);
+                
+                //encoded image data, put it in <img src=imageData> to display
+                imageData = "data:image/jpeg;base64, " + data;     
+                var img = $('<img>'); 
+                img.attr('src', imageData);
+                $("#user-images").append(img);
                 //$("#user-images").append('-Uploaded-');
             };
 
@@ -33,35 +35,19 @@ var appMain = appMain || {};
             navigator.camera.getPicture(success, error, config);
         },
         addContact: function () {
-            loadPhotos();
-            //$("#user-images").append('contact added ');
+            $("#user-images").append('contact added ');
         },
         save: function () {
-            //TODO create json from add-note.html(#user-content)
-            //TODO push json to database
             var note = {
                 title: this.get('title'),
                 content: this.get('content'),
                 date: this.get('date'),
                 time: this.get('time'),
-                alarm: this.get('alarmOn')
+                alarm: this.get('alarmOn'),
+                imageData: imageData
             };
-            console.log(note);
+            ds.push(note);
+            console.log(ds);
         },
     });
-
-    function loadPhotos() {
-        $("#user-images").append('-Loading images from Db-');
-        appMain.everlive.Files.get().then(function (data) {
-            var files = [];
-            data.result.forEach(function (image) {
-                files.push(image.Uri);
-            });
-            $("#user-images").kendoMobileListView({
-                dataSource: files,
-                template: "<img src='#: data #'>"
-            });
-            $("#user-images").append('-Loaded-');
-        });
-    }
 }(app.viewmodels));
