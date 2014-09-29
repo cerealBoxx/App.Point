@@ -2,13 +2,13 @@ var ds = ds || {};
 var notes = {};
 var everlive = {};
 var app = app || {};
-
+var kendoMobileApp = kendoMobileApp || {};
 (function () {
-    
     document.addEventListener('deviceready', function () {
         navigator.splashscreen.hide();
         everlive = new Everlive("cZswy0ZulYmXBaML");
         ds = new kendo.data.DataSource({
+            type: 'everlive',
             transport: {
                 read: {
                     url: 'https://api.everlive.com/v1/cZswy0ZulYmXBaML/Notes',
@@ -19,9 +19,8 @@ var app = app || {};
                 data: "Result"
             }
         });
-        app.mobileApp = new kendo.mobile.Application(document.body, {
+       kendoMobileApp =  new kendo.mobile.Application(document.body, {
             transition: 'slide',
-            skin: 'flat',
             initial: 'views/main.html'
         });
     }, false);
