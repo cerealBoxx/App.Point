@@ -1,11 +1,27 @@
-<div data-role="view" data-layout="default"> 
+<div data-role="view" data-layout="default" data-show ="app.viewModels.show" data-init = "app.viewModels.init">
     <div data-role="header">
         <div data-role="navbar">Appointment</div>
     </div>
     
-     <div data-role="footer">
+    <div>
+        <ul id = 'note-details-container' data-role="listview" 
+        data-pull-to-refresh="true" 
+        data-source="tempDs" 
+        data-bind="source: tempDs" 
+        data-template="template2"></ul>
+    </div>
+    
+    
+    <div data-role="footer">
         <div data-role="tabstrip">
             <a href="views/main.html" data-icon="reply">Back</a>
         </div>
     </div>
 </div>
+
+<script type="text/x-kendo-template" id="template2">
+            <p> <strong> #: title# </strong></p >
+            <p> #: content# </p>
+            <p>test</p>
+            <p>#: date#</p>
+ </script>
