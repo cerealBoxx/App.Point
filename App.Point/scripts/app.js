@@ -4,6 +4,7 @@ var everlive = {};
 var app = app || {};
 
 (function () {
+    
     document.addEventListener('deviceready', function () {
         navigator.splashscreen.hide();
         everlive = new Everlive("cZswy0ZulYmXBaML");
@@ -18,7 +19,7 @@ var app = app || {};
                 data: "Result"
             }
         });
-        new kendo.mobile.Application(document.body, {
+        app.mobileApp = new kendo.mobile.Application(document.body, {
             transition: 'slide',
             skin: 'flat',
             initial: 'views/main.html'
