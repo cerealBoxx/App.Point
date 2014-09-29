@@ -4,9 +4,9 @@ var kendoMobileApp = kendoMobileApp || {};
 
 (function (scope) {
     scope.show = function(){
-        $("#note-details-container").append(note.title);
-        $("#note-details-container").append(note.content);
-        $("#note-details-container").append(note.alarm);
+        $("#note-details-container").append("<p>note.title</p>");
+        $("#note-details-container").append("<p>note.content</p>");
+        
         var img = $('<img>');
                 img.attr('src', note.imageData);
                
