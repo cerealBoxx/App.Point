@@ -10,6 +10,11 @@ var kendoMobileApp = kendoMobileApp || {};
     document.addEventListener('deviceready', function () {
         navigator.splashscreen.hide();
         everlive = new Everlive("cZswy0ZulYmXBaML");
+        
+       
+            
+            
+        
         ds = new kendo.data.DataSource({
             type: 'everlive',
             transport: {
@@ -28,4 +33,11 @@ var kendoMobileApp = kendoMobileApp || {};
             initial: 'views/main.html'
         });
     }, false);
+    
+    document.addEventListener("offline", function(){
+        navigator.notification.alert("You are currently offline. Please check your connection.", function(){
+            console.log('offline');
+        });
+    }, false);
+    
 }());
