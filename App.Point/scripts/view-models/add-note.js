@@ -38,25 +38,23 @@ var ds = ds || {};
                 findContact(results.input1);
             }
             navigator.notification.prompt(
-                'Enter contact name', // message
-                onPrompt, // callback to invoke
-                'Add contact', // title
-                 ['Ok'], // buttonLabels
-                '' // defaultText
+                'Enter contact name', 
+                onPrompt, 
+                'Add contact', 
+                 ['Ok'], 
+                '' 
             );
         },
         save: function () {
             var connectionValid = checkConnection();
-            var title = this.get('title');
-            var date = this.get('date');
-            if (title == '') {
+            if (this.get('title') == '') {
                 navigator.notification.alert('Title is required');
                 return;
             }
-            if (date == '') {
-                navigator.notification.alert('Title is required');
-                return;
-            }
+            //if (this.get('date') == '') {
+                //navigator.notification.alert('Date is required');
+                //return;
+            //}
             if (connectionValid) {
                 var note = {
                     title: this.get('title'),
@@ -72,7 +70,7 @@ var ds = ds || {};
                     contentType: "application/json",
                     data: JSON.stringify(note),
                     success: function (data) {
-                        console.log(data);
+                        navigator.notification.alert('Note saved.');
                     },
                     error: function () {
                         alert('Error adding note')
