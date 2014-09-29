@@ -4,6 +4,7 @@ var notes = notes || {};
 
 (function (scope) {
     'use strict';
+    var contactsAdded = [];
     var imageData = '';
     scope.addNote = kendo.observable({
         title: '',
@@ -13,66 +14,102 @@ var notes = notes || {};
         alarmOn: false,
 
         addImage: function () {
+            function cameraSuccess(data) {
+                imageData = "data:image/jpeg;base64, " + data;
+                var img = $('<img>');
+                img.attr('src', imageData);
+                $("#user-images").append(img);
+            };
+
+            function cameraError() {
+                navigator.notification.alert("Unfortunately we could not add the image");
+            };
             var config = {
                 destinationType: Camera.DestinationType.DATA_URL,
                 targetHeight: 400,
                 targetWidth: 400
             };
-            navigator.camera.getPicture(success, error, config);
+            navigator.camera.getPicture(cameraSuccess, cameraError, config);
         },
 
         addContact: function () {
-            $("#user-images").append('contact added ');
+            function onPrompt(results) {
+                findContact(results.input1);
+            }
+            navigator.notification.prompt(
+                'Enter contact name', // message
+                onPrompt, // callback to invoke
+                'Add contact', // title
+                 ['Ok'], // buttonLabels
+                '' // defaultText
+            );
         },
         save: function () {
             var connectionValid = checkConnection();
-
+            alert(contactsAdded);
             if (connectionValid) {
-
                 var note = {
                     title: this.get('title'),
                     content: this.get('content'),
-                    date: this.get('date'),
-                    time: this.get('time'),
+                    date: parseDate(this.get('date'), this.get('time')),
                     alarm: this.get('alarmOn'),
-                    imageData: imageData
+                    imageData: imageData,
+                    contacts: contactsAdded
                 };
-
                 $.ajax({
                     type: "POST",
                     url: 'https://api.everlive.com/v1/cZswy0ZulYmXBaML/Notes',
                     contentType: "application/json",
                     data: JSON.stringify(note),
-                    success: function () {
-                        alert('Note added')
+                    success: function (data) {
+                        console.log(data);
                     },
                     error: function () {
                         alert('Error adding note')
                     }
                 });
-
                 //clear form
                 this.set('title', '');
                 this.set('content', '');
                 this.set('date', '');
                 this.set('time', '');
                 this.set('alarmOn', false);
+                imageData = '';
+                contactsAdded = [];
                 $("#user-images").empty();
+                $("#contacts-container").empty();
             } else {
                 alert("No internet connection. Cannot save note.");
             }
         },
     });
 
-    function success(data) {
-        imageData = "data:image/jpeg;base64, " + data;
-        var img = $('<img>');
-        img.attr('src', imageData);
-        $("#user-images").append(img);
+    function findContact(contactName) {
+        function onSuccess(contacts) {
+            for (var i = 0; i < contacts.length; i++) {
+                contactsAdded.push(contacts[i]);
+                $("#contacts-container").append('<li>' + contacts[i].displayName + '<\li>');
+            }
+        };
+
+        function onError(contactError) {
+            alert('onError!');
+        };
+        var options = new ContactFindOptions();
+        options.filter = contactName;
+        options.multiple = false;
+        var fields = ["displayName", "name"];
+        navigator.contacts.find(fields, onSuccess, onError, options);
     };
 
-    function error() {
-        navigator.notification.alert("Unfortunately we could not add the image");
+    function parseDate(date, time) {
+        if (date == '') {
+            return '';
+        }
+        var d = new Date(date);
+        var splitted = time.split(':');
+        d.setHours(splitted[0], splitted[1]);
+        return d;
     };
 
     function checkConnection() {
