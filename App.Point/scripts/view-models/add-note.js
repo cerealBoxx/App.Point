@@ -1,6 +1,7 @@
 var app = app || {};
 app.viewModels = app.viewModels || {};
 var notes = notes || {};
+var ds = ds || {};
 
 (function (scope) {
     'use strict';
@@ -14,7 +15,7 @@ var notes = notes || {};
         alarmOn: false,
 
         addImage: function () {
-            function cameraSuccess(data) {
+             function cameraSuccess(data) {
                 imageData = "data:image/jpeg;base64, " + data;
                 var img = $('<img>');
                 img.attr('src', imageData);
@@ -46,7 +47,6 @@ var notes = notes || {};
         },
         save: function () {
             var connectionValid = checkConnection();
-            alert(contactsAdded);
             if (connectionValid) {
                 var note = {
                     title: this.get('title'),
