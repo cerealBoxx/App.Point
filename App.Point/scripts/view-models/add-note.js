@@ -27,8 +27,8 @@ var ds = ds || {};
             };
             var config = {
                 destinationType: Camera.DestinationType.DATA_URL,
-                targetHeight: 400,
-                targetWidth: 400
+                targetHeight: 200,
+                targetWidth: 200
             };
             navigator.camera.getPicture(cameraSuccess, cameraError, config);
         },
@@ -59,7 +59,7 @@ var ds = ds || {};
                 var note = {
                     title: this.get('title'),
                     content: this.get('content'),
-                    date: parseDate(this.get('date'), this.get('time')),
+                    date:  parseDate(this.get('date'), this.get('time')),
                     alarm: this.get('alarmOn'),
                     imageData: imageData,
                     contacts: contactsAdded
@@ -96,7 +96,7 @@ var ds = ds || {};
         function onSuccess(contacts) {
             for (var i = 0; i < contacts.length; i++) {
                 contactsAdded.push(contacts[i]);
-                $("#contacts-container").append('<li>' + contacts[i].displayName + '<\li>');
+                $("#contacts-container").append('<div>' + contacts[i].displayName + '<\div>');
             }
         };
 
