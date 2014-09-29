@@ -1,10 +1,16 @@
 var ds = {};
-var appMain = appMain || {};
+var app = app || {};
 var notes = {};
 (function (scope) {
-    document.addEventListener('deviceready', function () {
+    document.addEventListener('deviceready', function (scope) {
         navigator.splashscreen.hide();
-        appMain.everlive = new Everlive("cZswy0ZulYmXBaML");
+       scope.everlive = new Everlive("cZswy0ZulYmXBaML");
+        console.log(scope.everlive);
+       scope.mobileApp = new kendo.mobile.Application(document.body, {
+            transition: 'slide',
+            skin: 'flat',
+            initial: 'views/main.html'
+        });
 
         notes = [
             {
@@ -19,14 +25,10 @@ var notes = {};
         ];
 
         // Build the data source for the items
-        ds = new kendo.data.DataSource({
-            data: notes
-        });
+        //ds = new kendo.data.DataSource({
+          //  data: notes
+        //});
         
-        new kendo.mobile.Application(document.body, {
-            transition: 'slide',
-            skin: 'flat',
-            initial: 'views/main.html'
-        });
+        
     }, false);
-}());
+}(app));
