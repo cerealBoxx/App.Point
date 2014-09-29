@@ -24,6 +24,11 @@ var notes = notes || {};
         addContact: function () {
             $("#user-images").append('contact added ');
         },
+        savePicture: function(){
+          var that = this;
+           
+        },
+
         save: function () {
             var connectionValid = checkConnection();
 
@@ -63,6 +68,18 @@ var notes = notes || {};
             }
         },
     });
+
+    var emptyGuid = '00000000-0000-0000-0000-000000000000';
+    var AppHelper = {
+        
+        resolveImageUrl: function (id) {
+            if (id && id !== emptyGuid) {
+                return everlive.Files.getDownloadUrl(id);
+            } else {
+                return '';
+            }
+        }
+    };
 
     function success(data) {
         imageData = "data:image/jpeg;base64, " + data;
