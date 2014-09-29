@@ -22,7 +22,6 @@ var kendoMobileApp = kendoMobileApp || {};
                 data: "Result"
             }
         });
-        tempDs = new kendo.data.DataSource();
        kendoMobileApp =  new kendo.mobile.Application(document.body, {
             transition: 'slide',
             initial: 'views/main.html'
