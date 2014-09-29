@@ -4,13 +4,20 @@ html {
     height: 100%;
     width: 100%;
 }
+.details-image {
+    margin-top: 20px;
+}
+#details-content {
+    text-align: center;
+    font-size: 150%;
+}
 #details-content {
     text-align: center;
     font-size: 120%;
     text-overflow: ellipsis;
 }
 #main-content{
-     white-space:nowrap;
+    white-space:nowrap;
     text-overflow: ellipsis;
 }
 .title{

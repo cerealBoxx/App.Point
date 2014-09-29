@@ -1,4 +1,3 @@
-
 var ds = ds || {};
 var tempDs = tempDs || {};
 var notes = {};
@@ -22,17 +21,15 @@ var kendoMobileApp = kendoMobileApp || {};
                 data: "Result"
             }
         });
-       kendoMobileApp =  new kendo.mobile.Application(document.body, {
+        kendoMobileApp = new kendo.mobile.Application(document.body, {
             transition: 'slide',
             initial: 'views/main.html'
         });
+        document.addEventListener("offline", function () {
+            kendoMobileApp.navigate('views/offline.html');
+        }, false);
+        document.addEventListener("online", function () {
+            kendoMobileApp.navigate('views/main.html');
+        }, false);
     }, false);
-    
-    document.addEventListener("offline", function(){
-        kendoMobileApp.navigate('views/offline.html');
-    }, false);
-     document.addEventListener("online", function(){
-        kendoMobileApp.navigate('views/main.html');
-    }, false);
-    
 }());

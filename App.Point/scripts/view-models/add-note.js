@@ -1,7 +1,5 @@
 var app = app || {};
 app.viewModels = app.viewModels || {};
-var notes = notes || {};
-var ds = ds || {};
 
 (function (scope) {
     'use strict';
@@ -12,6 +10,7 @@ var ds = ds || {};
         content: '',
         date: '',
         time: '',
+        dateShort: '',
         alarmOn: false,
 
         addImage: function () {
@@ -38,11 +37,10 @@ var ds = ds || {};
                 findContact(results.input1);
             }
             navigator.notification.prompt(
-                'Enter contact name', 
-                onPrompt, 
-                'Add contact', 
-                 ['Ok'], 
-                '' 
+                'Enter contact name',
+                onPrompt,
+                'Add contact', ['Ok'],
+                ''
             );
         },
         save: function () {
@@ -52,14 +50,14 @@ var ds = ds || {};
                 return;
             }
             //if (this.get('date') == '') {
-                //navigator.notification.alert('Date is required');
-                //return;
+            //navigator.notification.alert('Date is required');
+            //return;
             //}
             if (connectionValid) {
                 var note = {
                     title: this.get('title'),
                     content: this.get('content'),
-                    date:  parseDate(this.get('date'), this.get('time')),
+                    date: parseDate(this.get('date'), this.get('time')),
                     alarm: this.get('alarmOn'),
                     imageData: imageData,
                     contacts: contactsAdded
@@ -92,21 +90,25 @@ var ds = ds || {};
         },
     });
 
+
     function findContact(contactName) {
         function onSuccess(contacts) {
             for (var i = 0; i < contacts.length; i++) {
                 contactsAdded.push(contacts[i]);
                 $("#contacts-container").append('<div>' + contacts[i].displayName + '<\div>');
+                $("#contacts-container").append('<div>' + contacts[i].phoneNumbers[0].value + '<\div>');
             }
         };
 
         function onError(contactError) {
             alert('onError!');
         };
+
         var options = new ContactFindOptions();
         options.filter = contactName;
         options.multiple = false;
         var fields = ["displayName", "name"];
+
         navigator.contacts.find(fields, onSuccess, onError, options);
     };
 
