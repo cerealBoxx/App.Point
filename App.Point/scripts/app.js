@@ -1,8 +1,10 @@
+
 var ds = ds || {};
 var notes = {};
 var everlive = {};
 var app = app || {};
 var kendoMobileApp = kendoMobileApp || {};
+
 (function () {
     document.addEventListener('deviceready', function () {
         navigator.splashscreen.hide();
