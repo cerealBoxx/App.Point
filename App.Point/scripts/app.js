@@ -1,34 +1,27 @@
-var ds = {};
-var app = app || {};
+var ds = ds || {};
 var notes = {};
-(function (scope) {
-    document.addEventListener('deviceready', function (scope) {
+var everlive = {};
+var app = app || {};
+
+(function () {
+    document.addEventListener('deviceready', function () {
         navigator.splashscreen.hide();
-       scope.everlive = new Everlive("cZswy0ZulYmXBaML");
-        console.log(scope.everlive);
-       scope.mobileApp = new kendo.mobile.Application(document.body, {
+        everlive = new Everlive("cZswy0ZulYmXBaML");
+        ds = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: 'https://api.everlive.com/v1/cZswy0ZulYmXBaML/Notes',
+                    dataType: "jsonp"
+                },
+            },
+            schema: {
+                data: "Result"
+            }
+        });
+        new kendo.mobile.Application(document.body, {
             transition: 'slide',
             skin: 'flat',
             initial: 'views/main.html'
         });
-
-        notes = [
-            {
-
-                title: "Hello world !",
-                content: "Lorem ipsum ala bala",
-                date: "1/1/2001",
-                time: '',
-                imageData: '',
-                alarm: true
-                },
-        ];
-
-        // Build the data source for the items
-        //ds = new kendo.data.DataSource({
-          //  data: notes
-        //});
-        
-        
     }, false);
-}(app));
+}());
