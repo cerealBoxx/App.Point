@@ -47,6 +47,16 @@ var ds = ds || {};
         },
         save: function () {
             var connectionValid = checkConnection();
+            var title = this.get('title');
+            var date = this.get('date');
+            if (title == '') {
+                navigator.notification.alert('Title is required');
+                return;
+            }
+            if (date == '') {
+                navigator.notification.alert('Title is required');
+                return;
+            }
             if (connectionValid) {
                 var note = {
                     title: this.get('title'),

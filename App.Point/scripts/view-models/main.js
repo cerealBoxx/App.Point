@@ -6,13 +6,7 @@ var tempDs = tempDs || {};
 (function (scope) {
     scope.main = kendo.observable({
         noteSelected: function (e) {
-            $('#note-details-container').empty();
-            note = ds.getByUid(e.data.uid);
-            tempDs = new kendo.data.DataSource({
-                data: [note]
-            });
-            console.log(note);
-            console.log(tempDs);
+            
             kendoMobileApp.navigate('views/note-details.html?uid=' + e.data.uid);
         },
     });

@@ -3,8 +3,10 @@ app.viewModels = app.viewModels || {};
 var kendoMobileApp = kendoMobileApp || {};
 
 (function (scope) {
-    scope.show = function(){
-        console.log('wat');
+    scope.show = function(e){
+        noteUid = e.view.params.uid;
+        note = ds.getByUid(noteUid);
+        $('#details-content').append(note.title);
     };
     scope.noteDetails = kendo.observable({
         init: function () {
