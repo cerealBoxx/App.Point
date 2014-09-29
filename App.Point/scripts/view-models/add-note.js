@@ -15,7 +15,7 @@ var ds = ds || {};
         alarmOn: false,
 
         addImage: function () {
-             function cameraSuccess(data) {
+            function cameraSuccess(data) {
                 imageData = "data:image/jpeg;base64, " + data;
                 var img = $('<img>');
                 img.attr('src', imageData);

@@ -4,7 +4,8 @@ var kendoMobileApp = kendoMobileApp || {};
 (function (scope) {
     scope.main = kendo.observable({
         noteSelected: function (e) {
-            kendoMobileApp.navigate('views/add-note.html');
+            alert(e.data.uid);
+            kendoMobileApp.navigate('views/note-details.html');
         },
     });
 }(app.viewModels));
